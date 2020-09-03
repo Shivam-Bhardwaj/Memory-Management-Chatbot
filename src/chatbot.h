@@ -7,7 +7,7 @@
 
 // Helps to see what's going under the hood
 #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
-#define TAG printf(">>>>> TAG: line (%d), function (%s), file (%s)\n\n", \
+#define TAG printf(">>> TAG: line (%d), function (%s), file (%s)\n\n", \
               __LINE__, __FUNCTION__, __FILENAME__);
 
 class GraphNode; // forward declaration
@@ -19,7 +19,7 @@ class ChatBot {
   wxBitmap *_image; // avatar image
 
   // data handles (not owned)
-  GraphNode *_currentNode;
+  GraphNode *_currentNode{};
   GraphNode *_rootNode;
   ChatLogic *_chatLogic;
 
@@ -29,7 +29,7 @@ class ChatBot {
   public:
   // constructors / destructors
   ChatBot();                     // constructor WITHOUT memory allocation
-  ChatBot(std::string filename); // constructor WITH memory allocation
+  ChatBot(const std::string& filename); // constructor WITH memory allocation
   ~ChatBot();
 
   //// STUDENT CODE

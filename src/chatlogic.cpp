@@ -34,20 +34,7 @@ ChatLogic::~ChatLogic() {
   ////
   std::cout << "ChatLogic Destructor" << std::endl;
   TAG;
-  // delete chatbot instance
-  //delete _chatBot;
-
-  // delete all nodes
-  // for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
-  // {
-  //     delete *it;
-  // }
-
-  // delete all edges
-  // for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
-  // {
-  //     delete *it;
-  // }
+  // Removed manual deletion
 
   ////
   //// EOF STUDENT CODE
@@ -83,17 +70,17 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
     while (getline(file, lineStr)) {
       // extract all tokens from current line
       tokenlist tokens;
-      while (lineStr.size() > 0) {
+      while (!lineStr.empty()) {
         // extract next token
-        int posTokenFront = lineStr.find("<");
-        int posTokenBack = lineStr.find(">");
+        int posTokenFront = lineStr.find('<');
+        int posTokenBack = lineStr.find('>');
         if (posTokenFront < 0 || posTokenBack < 0)
           break; // quit loop if no complete token has been found
         std::string tokenStr = lineStr.substr(posTokenFront + 1,
                                               posTokenBack - 1);
 
         // extract token type and info
-        int posTokenInfo = tokenStr.find(":");
+        int posTokenInfo = tokenStr.find(':');
         if (posTokenInfo != std::string::npos) {
           std::string tokenType = tokenStr.substr(0, posTokenInfo);
           std::string tokenInfo = tokenStr.substr(posTokenInfo + 1,
